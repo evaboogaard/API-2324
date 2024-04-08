@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   {% block head %}
-    <title>My First Page</title>
+    <title>{{ title }}</title>
   {% endblock %}
   {% if NODE_ENV == "development" %}
     <script type="module" src="http://localhost:5173/@vite/client" defer></script>
@@ -17,6 +17,8 @@
 </head>
 
 <body>
+  {% include "components/modes.liquid" %}
+
   {% block content %}{% endblock %}
 </body>
 </html>

@@ -46,3 +46,24 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+/**********/
+/*  BASIC STYLING & DECLARING VARIABLES  */
+/**********/
+
+:root{
+  --background-color: #20184a;
+  --text-color: papayawhip;
+
+  --font-stack-primary: 'futura', Verdana, monospace;
+  --font-stack-secondary: 'gillsans', Verdana, monospace;
+}
+
+body{
+  background: linear-gradient(-45deg, black, var(--background-color), black);
+  font-family: var(--font-stack-primary);
+  color: var(--text-color);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}

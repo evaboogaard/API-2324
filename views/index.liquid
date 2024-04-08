@@ -1,0 +1,26 @@
+{% layout "layouts/base.liquid" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+  <ul class="galaxy">
+    {% for movie in movies %}
+      {% assign index = forloop.index0 %}
+      <li class="{% if index < 5 %}top5{% elsif index < 10 %}top10{% elsif index < 15 %}top15{% elsif index < 20 %}top20{% endif %}">
+        <div class="planet"></div>
+
+        {% comment %} <div class="movie-content">
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.overview }}</p>
+        <p>Duration: <time> {{ movie.duration }} minutes</time></p>
+        <p>Language: {{ movie.language }}</p>
+        <p>Genres: {{ movie.genres | join: ', ' }}</p>
+        <p>Release year: {{ movie.releaseYear }}</p>
+        {% if movie.posterImg %}
+          <img id="img" src="{{ movie.posterImg }}" alt="">
+        {% endif %}
+        </div> {% endcomment %}
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

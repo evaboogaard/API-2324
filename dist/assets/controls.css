@@ -1,0 +1,60 @@
+/**********/
+/*  CHOOOOOOSE YOUUUUUR CHARACTER  */
+/**********/
+
+
+
+
+
+/**********/
+/* LIGHT & DARK MODES  */
+/**********/
+
+body {
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --colors: dark;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --colors: light;
+  }
+}
+
+:root:has([value='dark']:checked) {
+  --colors: dark;
+}
+
+:root:has([value='light']:checked) {
+  --colors: light;
+}
+
+@container style(--colors:light) {
+    body {
+      color-scheme: light;
+      --primary-color: white;
+      --text-color: black;
+  }
+}
+
+/**********/
+/*  LIGHT & DARK CONTROLS  */
+/**********/
+
+.modes{
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+}
+
+.content-controls{
+  position: absolute;
+  background-color: red;
+  top: 5%;
+  left: 5%;
+}

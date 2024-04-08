@@ -1,0 +1,25 @@
+{% block modes %}
+<div class="modes">
+	<label>
+		<input type="radio" name="colors" value="system" checked> system
+	</label>
+	<label>
+		<input type="radio" name="colors" value="dark"> dark
+	</label>
+	<label>
+		<input type="radio" name="colors" value="light"> light
+	</label>
+</div>
+
+<div id="content-controls">
+  <label>
+		<input type="radio" name="content" value="trending" checked>🔥 trending 🔥
+	</label>
+	<label>
+		<input type="radio" name="content" value="classic">👵🏼 all-time classics 🧓🏾
+	</label>
+	<label>
+		<input type="radio" name="content" value="obscure"> 🧐 obscure 🧐
+	</label>
+</div>
+{% endblock %}

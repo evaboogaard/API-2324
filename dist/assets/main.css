@@ -1,0 +1,38 @@
+@import 'baseline.css';
+@import 'galaxy.css';
+@import 'controls.css';
+
+
+/**********/
+/*  FONTS */
+/**********/
+
+@font-face {
+  font-family: 'futura';
+  font-weight: 300;
+  src: url('fonts/futura.woff2');
+}
+
+@font-face {
+  font-family: 'futura';
+  font-weight: 200;
+  src: url('fonts/futura-light.woff2');
+}
+
+@font-face {
+  font-family: 'gillsans';
+  font-weight: 300;
+  src: url('fonts/gillsans-bold.ttf');
+}
+
+@font-face {
+  font-family: 'gillsans';
+  font-weight: 200;
+  src: url('fonts/gillsans.ttf');
+}
+
+@font-face {
+  font-family: 'gillsans';
+  font-weight: 100;
+  src: url('fonts/gillsans-light.ttf');
+}

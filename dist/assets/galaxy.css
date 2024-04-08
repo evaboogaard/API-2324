@@ -1,0 +1,89 @@
+ul.galaxy{
+
+  li:not(:first-of-type){
+   /* display: none; */
+  }
+
+  .movie-content{
+    display: none;
+    flex-direction: column;
+
+    img{
+      width:30%;
+    }
+  }
+
+  li{
+    .planet{
+      --initial-width: 5rem;
+      --width: var(--initial-width);
+      position: absolute;
+      border-radius: 50%;
+      aspect-ratio: 1;
+      width: var(--width);
+    }
+
+    &:first-of-type{
+      .planet{
+        --width: calc(var(--initial-width) * 2);
+        top: 10vh;
+        left: 30vw;
+
+
+        &::before{
+        content: 'NUMBER 1'
+        }
+      }
+    }
+
+    &:nth-of-type(2){
+      .planet{
+        &::before{
+        content: 'NUMBER 2'
+        }
+      }
+    }
+
+    &:nth-of-type(3){
+      .planet{
+        &::before{
+        content: 'NUMBER 2'
+        }
+      }
+    }
+
+    &.top5{
+      .planet{
+      background-color: #f09;
+      }
+    }
+
+    &.top10{
+      .planet{
+      --width: calc(var(--initial-width) * 0.9);
+      background-color: #fff;
+
+      }
+    }
+
+    &.top15{
+      .planet{
+      --width: calc(var(--initial-width) * 0.7);
+      background-color: papayawhip;
+
+
+      }
+    }
+
+    &.top20{
+      .planet{
+      --width: calc(var(--initial-width) * 0.5);
+      background-color: white;
+
+
+      }
+    }
+
+  }
+
+}
