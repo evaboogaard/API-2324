@@ -19,7 +19,7 @@ const options = {
   }
 };
 const apiKey = process.env.MOVIEDB_TOKEN; // API-sleutel uit .env-bestand
-const apiUrl = `${baseUrl}/discover/movie?api_key=${apiKey}&include_adult=false&include_video=false&language=en-US&sort_by=vote_count.desc&with_genres=878`;
+const apiUrl = `${baseUrl}/discover/movie?api_key=${apiKey}&include_adult=false&include_video=false&language=en-US&sort_by=vote_count.desc&with_genres=878&without_companies=420`;
 const app = new App();
 
 app.use(logger()).use('/', sirv('dist/assets')).listen(3000);
@@ -61,10 +61,12 @@ const getMovies = async (url) => {
     // Hier kun je de gewenste bewerkingen uitvoeren op de verkregen filmgegevens
     const sciFiMovies = data.results.filter(movie => movie.genre_ids.includes(878));
 
-    console.log('Movie runtimes:', data.results.map(movie => movie.runtime));
+    // Alleen de eerste 10 films behouden
+    const first10Movies = sciFiMovies.slice(0, 10);
 
+    console.log(first10Movies.map(movie => movie.title));
 
-    return sciFiMovies.map(movie => ({
+    return first10Movies.map(movie => ({
       title: movie.title,
       overview: movie.overview,
       trailerLink: `https://www.youtube.com/results?search_query=${encodeURIComponent(movie.title)}+trailer`,

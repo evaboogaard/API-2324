@@ -1,24 +1,34 @@
 {% layout "layouts/base.liquid" %}
 
 {% block content %}
-<h1>{{ title }}</h1>
+<h1 class="sr-only">{{ title }}</h1>
   <ul class="galaxy">
     {% for movie in movies %}
       {% assign index = forloop.index0 %}
-      <li class="{% if index < 5 %}top5{% elsif index < 10 %}top10{% elsif index < 15 %}top15{% elsif index < 20 %}top20{% endif %}">
-        <div class="planet"></div>
+      <li>
+        <button class="planet" id="{% if index == 0 %}sun{% elsif index == 1 %}mercury{% elsif index == 2 %}venus{% elsif index == 3 %}earth{% elsif index == 4 %}mars{% elsif index == 5 %}jupiter{% elsif index == 6 %}saturn{% elsif index == 7 %}uranus{% elsif index == 8 %}neptune{% elsif index == 9 %}pluto{% endif %}">
+          <span class="movie-title"><h2>{{ movie.title }}</h2></span>
+          <span class="movie-title">{{ movie.title }}</span>
+          <span class="movie-title">{{ movie.title }}</span>
+          <span class="movie-title">{{ movie.title }}</span>
+          <span class="movie-title">{{ movie.title }}</span>
+        </button>
 
-        {% comment %} <div class="movie-content">
-        <h2>{{ movie.title }}</h2>
-        <p>{{ movie.overview }}</p>
-        <p>Duration: <time> {{ movie.duration }} minutes</time></p>
-        <p>Language: {{ movie.language }}</p>
-        <p>Genres: {{ movie.genres | join: ', ' }}</p>
-        <p>Release year: {{ movie.releaseYear }}</p>
+       <div class="movie-content">
+        <div>
+          <h2>{{ movie.title }}</h2>
+          <p class="overview">{{ movie.overview }}</p>
+          <p>{{ movie.releaseYear }} - <time> {{ movie.duration }} minutes</time> - {{ movie.genres | join: ', ' }}</p>
+          {% comment %} <p>Language: {{ movie.language }}</p> {% endcomment %}
+
+          <button class="space-btn">View more
+            <span class="sr-only">about the movie {{ movie.title }}</span>
+          </button>
+        </div>
         {% if movie.posterImg %}
           <img id="img" src="{{ movie.posterImg }}" alt="">
         {% endif %}
-        </div> {% endcomment %}
+        </div>
       </li>
     {% endfor %}
   </ul>

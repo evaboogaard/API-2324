@@ -1,0 +1,9 @@
+header{
+  display: grid;
+  place-items: center;
+  margin-top: 5vh;
+
+  svg{
+    width: clamp(10rem, 30vw, 20rem);
+  }
+}

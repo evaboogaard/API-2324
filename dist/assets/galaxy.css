@@ -1,89 +1,264 @@
-ul.galaxy{
+@property --p1 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
 
-  li:not(:first-of-type){
-   /* display: none; */
+@property --p2 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 70%;
+}
+
+@property --a1 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 10%;
+}
+
+@property --a2 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+
+ul.galaxy{
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+  padding: 20vh 10vw;
+
+  li{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    &:first-of-type{
+        align-self: center;
+
+        .planet{
+          align-self: center;
+        }
+    }
+
+    &:nth-of-type(even){
+      align-self: end;
+      width: fit-content;
+
+      .planet{
+        align-self: end;
+      }
+    }
+  }
+
+  .planet{
+    --sun-width: 20rem;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    transform-style: preserve-3d;
+    perspective: 80rem;
+
+    .movie-title{
+      --ani-initial-delay: -20s;
+      --ani-delay: var(--ani-initial-delay);
+      grid-area:1/1;
+      text-transform: uppercase;
+      text-align: center;
+      padding-inline: 1.5rem;
+      background-color: black;
+      animation: title-3d-ani 20s var(--ani-delay) infinite linear;
+
+      &:first-of-type{
+        --ani-delay: calc(var(--ani-initial-delay) * 0);
+      }
+
+      &:nth-of-type(2){
+        --ani-delay: calc(var(--ani-initial-delay) * 0.2);
+      }
+
+      &:nth-of-type(3){
+        --ani-delay: calc(var(--ani-initial-delay) * 0.4);
+      }
+
+      &:nth-of-type(4){
+        --ani-delay: calc(var(--ani-initial-delay) * 0.6);
+      }
+
+      &:nth-of-type(5){
+        --ani-delay: calc(var(--ani-initial-delay) * 0.8);
+      }
+    }
+  }
+
+  #sun{
+    width: var(--sun-width);
+    background-image:
+      linear-gradient(45deg, orangered var(--p1), transparent var(--p2)),
+      linear-gradient(135deg, gold var(--a1), transparent var(--a2)),
+      linear-gradient(225deg, darkorange 10%, transparent 60%),
+      linear-gradient(315deg, gold 100%, transparent 70%);
+    animation-name: sun-var-ani, sun-boxshadow;
+    animation-duration: 2s, 2s;
+    animation-timing-function: ease-in-out, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+    animation-direction: alternate, alternate;
+  }
+
+  #mercury{
+    width: calc(var(--sun-width) * 0.5);
+    background-image:
+      repeating-radial-gradient(
+        transparent 0 .1rem,
+        #6c606a21 .5rem 1rem
+      ),
+      radial-gradient(
+      #ddd7d2 0 3%,
+      #cdc2bf 15% 30%,
+      #8a7a7e 60%,
+      #6c606a 80%
+    );
+    background-size: 150% 150%;
+  }
+
+  #venus{
+    width: calc(var(--sun-width) * 0.7);
+    background-color: darkorange;
+  }
+
+  #earth{
+    width: calc(var(--sun-width) * 0.6);
+    background-color: dodgerblue;
+  }
+
+  #mars{
+    width: calc(var(--sun-width) * 0.5);
+    background-image:
+    linear-gradient(
+      140deg in oklch,
+      maroon,
+      transparent 2%
+    ),
+    repeating-radial-gradient(
+    saddlebrown 0 1rem,
+    sandybrown 2rem 3rem
+    );
+    background-size: 10000% 200%;
+    background-position: top left;
+    rotate: 20deg;
+  }
+
+  #jupiter{
+    width: calc(var(--sun-width) * 0.8);
+    background-color: blue;
+  }
+
+  #saturn{
+    width: calc(var(--sun-width) * 0.8);
+    background-color: rebeccapurple;
+  }
+
+  #uranus{
+    width: calc(var(--sun-width) * 0.6);
+    background-color: darkcyan;
+  }
+
+  #neptune{
+    width: calc(var(--sun-width) * 0.6);
+    background-color: red;
+  }
+
+  #pluto{
+    width: calc(var(--sun-width) * 0.2);
+    background-color: saddlebrown;
   }
 
   .movie-content{
+    --space-color: #a8d4ff;
+    z-index: 1000;
     display: none;
-    flex-direction: column;
+    transition: var(--transition-base);
+    width: clamp(35rem, 100%, 50rem);
+    height: 20rem;
+    background-color: black;
+    transform: translateY(2rem);
+    border-radius: .5rem;
+    border: 2px solid var(--space-color);
+
+    &.shown{
+      display: flex;
+    }
+
+    div{
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 0 2rem 3rem;
+      gap: 1rem;
+
+      h2{
+        text-transform: uppercase;
+        font-size: 2rem;
+        letter-spacing: 10px;
+        font-weight: bold;
+      }
+
+      .space-btn{
+        font-family: var(--font-stack-primary);
+        width: fit-content;
+        padding: .75rem 2rem;
+        border-radius: 5rem;
+        background-color: transparent;
+        border: 1px solid var(--space-color);
+        font-size: 1rem;
+      }
+    }
+
 
     img{
-      width:30%;
+      height: 100%;
+      object-fit: cover;
+      padding-left: 2rem;
     }
   }
+}
 
-  li{
-    .planet{
-      --initial-width: 5rem;
-      --width: var(--initial-width);
-      position: absolute;
-      border-radius: 50%;
-      aspect-ratio: 1;
-      width: var(--width);
-    }
-
-    &:first-of-type{
-      .planet{
-        --width: calc(var(--initial-width) * 2);
-        top: 10vh;
-        left: 30vw;
+@keyframes title-3d-ani {
+  0%{ transform:rotateY(0turn) translatez(min(50vw, 13em)); }
+  100%{ transform:rotateY(1turn) translatez(min(50vw, 13em)); }
+}
 
 
-        &::before{
-        content: 'NUMBER 1'
-        }
-      }
-    }
-
-    &:nth-of-type(2){
-      .planet{
-        &::before{
-        content: 'NUMBER 2'
-        }
-      }
-    }
-
-    &:nth-of-type(3){
-      .planet{
-        &::before{
-        content: 'NUMBER 2'
-        }
-      }
-    }
-
-    &.top5{
-      .planet{
-      background-color: #f09;
-      }
-    }
-
-    &.top10{
-      .planet{
-      --width: calc(var(--initial-width) * 0.9);
-      background-color: #fff;
-
-      }
-    }
-
-    &.top15{
-      .planet{
-      --width: calc(var(--initial-width) * 0.7);
-      background-color: papayawhip;
-
-
-      }
-    }
-
-    &.top20{
-      .planet{
-      --width: calc(var(--initial-width) * 0.5);
-      background-color: white;
-
-
-      }
-    }
-
+@keyframes sun-var-ani{
+  0%{
+    --p1: 0%;
+    --p2: 70%;
+    --a1: 10%;
+    --a2: 50%;
   }
 
+  100%{
+    --p1: 20%;
+    --p2: 80%;
+    --a1: 0%;
+    --a2: 20;
+  }
+}
+
+@keyframes sun-boxshadow{
+  0%{
+    rotate: 20deg;
+    box-shadow:
+    0 0 1rem papayawhip,
+    0 0 2rem gold,
+    0 0 5rem orange;
+  }
+
+  100%{
+    rotate: 0deg;
+    box-shadow:
+    0 0 2rem papayawhip,
+    0 0 3rem gold,
+    0 0 10rem orange;
+  }
 }

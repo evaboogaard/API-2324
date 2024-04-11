@@ -1,5 +1,5 @@
 {% block modes %}
-<div class="modes">
+{% comment %} <div class="modes">
 	<label>
 		<input type="radio" name="colors" value="system" checked> system
 	</label>
@@ -9,9 +9,9 @@
 	<label>
 		<input type="radio" name="colors" value="light"> light
 	</label>
-</div>
+</div> {% endcomment %}
 
-<div id="content-controls">
+{% comment %} <div id="content-controls">
   <label>
 		<input type="radio" name="content" value="trending" checked>🔥 trending 🔥
 	</label>
@@ -21,5 +21,5 @@
 	<label>
 		<input type="radio" name="content" value="obscure"> 🧐 obscure 🧐
 	</label>
-</div>
+</div> {% endcomment %}
 {% endblock %}
