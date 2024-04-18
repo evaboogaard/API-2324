@@ -1,0 +1,47 @@
+fieldset {
+	display:flex;
+	font-size:2em;
+	border-radius:.5em;
+}
+
+legend{
+  font-size: 1rem;
+}
+
+input {
+	position:absolute;
+	left:-9999em;
+}
+
+label {
+	display:block;
+	padding:.1em;
+	color:whitesmoke;
+	transition:color .2s, scale .2s;
+	line-height:1em;
+	border-radius:.25em;
+  transform-origin: bottom;
+}
+
+label:not( :checked + label ) {
+	cursor:pointer;
+}
+
+label::after {
+	content:"★";
+}
+
+input:checked + label,
+label:has(~ :checked) {
+	color:gold;
+}
+
+label:hover,
+label:has(~ :hover) {
+	color: dodgerblue;
+	scale:1.25;
+}
+
+input:focus-visible + label {
+	outline:solid .1em midnightblue;
+}

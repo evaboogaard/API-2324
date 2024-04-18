@@ -2,7 +2,11 @@
 @import 'galaxy.css';
 @import 'controls.css';
 @import 'header.css';
-
+@import 'detail.css';
+@import 'cast.css';
+@import 'similar.css';
+@import 'rating.css';
+@import 'buttons.css';
 
 
 /**********/

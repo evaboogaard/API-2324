@@ -60,6 +60,8 @@ button{
   --background-color: #20184a;
   --text-color: papayawhip;
 
+  --border-color: #a8d4ff;
+
   --font-stack-primary: 'futura', Verdana, monospace;
   --font-stack-secondary: 'gillsans', Verdana, monospace;
 
@@ -67,7 +69,8 @@ button{
 }
 
 body{
-  background: linear-gradient(-45deg, black, var(--background-color), black);
+  background-color: var(--background-color);
+  /* background: linear-gradient(-45deg, black, var(--background-color), black); */
   font-family: var(--font-stack-primary);
   color: var(--text-color);
   width: 100vw;

@@ -1,9 +1,12 @@
 header{
   display: grid;
   place-items: center;
-  margin-top: 5vh;
 
-  svg{
+  .logo{
+    margin-top: 5vh;
     width: clamp(10rem, 30vw, 20rem);
+    rotate: 20deg;
+    top: -50vh;
+    scale: 0;
   }
 }

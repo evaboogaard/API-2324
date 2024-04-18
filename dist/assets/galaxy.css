@@ -22,6 +22,19 @@
   initial-value: 50%;
 }
 
+.stars{
+  width: 1.5px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: fixed;
+  background-color: white;
+  left: 0;
+  top: 0;
+  filter: drop-shadow(10rem 20rem 1.5px white);
+  box-shadow: 0 0 .5rem white;
+}
+
+
 ul.galaxy{
   display: flex;
   flex-direction: column;
@@ -59,6 +72,32 @@ ul.galaxy{
     place-items: center;
     transform-style: preserve-3d;
     perspective: 80rem;
+    transform-origin: center;
+    transition: var(--transition-base);
+
+    &:hover{
+      outline: 2px solid color-mix(
+        in oklch,
+        var(--background-color),
+        white 80%);
+      outline-offset: 20px;
+
+      .movie-title{
+        filter: drop-shadow(0 0 .5rem black) invert(100%);
+      }
+    }
+
+    &:focus{
+      outline-color: color-mix(
+        in oklch,
+        var(--background-color),
+        white 50%);
+        outline-offset: 10px;
+
+      .movie-title{
+        filter: drop-shadow(0 0 .5rem black) invert(100%);
+      }
+    }
 
     .movie-title{
       --ani-initial-delay: -20s;
@@ -67,7 +106,12 @@ ul.galaxy{
       text-transform: uppercase;
       text-align: center;
       padding-inline: 1.5rem;
-      background-color: black;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 2rem;
+      letter-spacing: .05rem;
+      font-style: bold;
+      transition: var(--transition-base);
+      filter: drop-shadow(0 0 .5rem black) invert(0);
       animation: title-3d-ani 20s var(--ani-delay) infinite linear;
 
       &:first-of-type{
@@ -104,6 +148,7 @@ ul.galaxy{
     animation-timing-function: ease-in-out, ease-in-out;
     animation-iteration-count: infinite, infinite;
     animation-direction: alternate, alternate;
+    scale: 0.5;
   }
 
   #mercury{
@@ -120,16 +165,29 @@ ul.galaxy{
       #6c606a 80%
     );
     background-size: 150% 150%;
+    animation: planet-rotate-right 3s infinite ease-in-out alternate;
   }
 
   #venus{
     width: calc(var(--sun-width) * 0.7);
-    background-color: darkorange;
+    background-image:
+      linear-gradient(45deg, red var(--p1), transparent var(--p2)),
+      linear-gradient(135deg, #c60000 var(--a1), transparent var(--a2)),
+      linear-gradient(225deg, darkorange 10%, transparent 60%),
+      linear-gradient(315deg, #cc6d00 100%, transparent 70%);
+    rotate: 5deg;
+    animation: planet-rotate-left 2.5s infinite ease-in-out alternate;
   }
 
   #earth{
     width: calc(var(--sun-width) * 0.6);
-    background-color: dodgerblue;
+    background-image:
+      linear-gradient(45deg, dodgerblue var(--p1), transparent var(--p2)),
+      linear-gradient(135deg, midnightblue var(--a1), transparent var(--a2)),
+      linear-gradient(225deg, seagreen 10%, transparent 60%),
+      linear-gradient(315deg, green 100%, transparent 70%);
+    rotate: -5deg;
+    animation: planet-rotate-left 3s infinite ease-in-out alternate;
   }
 
   #mars{
@@ -147,44 +205,57 @@ ul.galaxy{
     background-size: 10000% 200%;
     background-position: top left;
     rotate: 20deg;
+    animation: planet-rotate-right 2s infinite ease-in-out alternate;
   }
 
   #jupiter{
     width: calc(var(--sun-width) * 0.8);
     background-color: blue;
+    rotate: 10deg;
+    animation: planet-rotate-left 3s infinite ease-in-out alternate;
   }
 
   #saturn{
     width: calc(var(--sun-width) * 0.8);
     background-color: rebeccapurple;
+    rotate: -15deg;
+    animation: planet-rotate-right 2.5s infinite ease-in-out alternate;
   }
 
   #uranus{
     width: calc(var(--sun-width) * 0.6);
     background-color: darkcyan;
+    rotate: 5deg;
+    animation: planet-rotate-left 2s infinite ease-in-out alternate;
   }
 
   #neptune{
     width: calc(var(--sun-width) * 0.6);
     background-color: red;
+    rotate: 10deg;
+    animation: planet-rotate-right 3s infinite ease-in-out alternate;
   }
 
   #pluto{
     width: calc(var(--sun-width) * 0.2);
     background-color: saddlebrown;
+    rotate: -10deg;
+    animation: planet-rotate-left 2.5s infinite ease-in-out alternate;
+    scale: 1.1;
   }
 
   .movie-content{
-    --space-color: #a8d4ff;
     z-index: 1000;
     display: none;
     transition: var(--transition-base);
     width: clamp(35rem, 100%, 50rem);
-    height: 20rem;
-    background-color: black;
+    height: 25rem;
+    overflow: hidden;
+    background-color: var(--background-color);
     transform: translateY(2rem);
     border-radius: .5rem;
-    border: 2px solid var(--space-color);
+    border: 2px solid var(--border-color);
+    align-self: center;
 
     &.shown{
       display: flex;
@@ -193,6 +264,7 @@ ul.galaxy{
     div{
       display: flex;
       flex-direction: column;
+      justify-content: center;
       padding: 2rem 0 2rem 3rem;
       gap: 1rem;
 
@@ -201,16 +273,21 @@ ul.galaxy{
         font-size: 2rem;
         letter-spacing: 10px;
         font-weight: bold;
+        border-top: 3px solid color-mix(in oklch, var(--border-color), transparent 70%);
+        border-right: 3px solid color-mix(in oklch, var(--border-color), transparent 60%);
+        border-bottom: 3px solid color-mix(in oklch, var(--border-color), transparent 90%);
+        border-left: 3px solid color-mix(in oklch, var(--border-color), transparent 80%);
+        border-radius: 50%;
       }
 
-      .space-btn{
-        font-family: var(--font-stack-primary);
-        width: fit-content;
-        padding: .75rem 2rem;
-        border-radius: 5rem;
-        background-color: transparent;
-        border: 1px solid var(--space-color);
-        font-size: 1rem;
+      .metadata{
+        border-top: 1px solid var(--border-color);
+        border-bottom: 2px solid var(--border-color);
+        padding: 1rem 0;
+        border-radius: .3rem;
+      }
+      .overview{
+        padding-top: .5rem;
       }
     }
 
@@ -260,5 +337,25 @@ ul.galaxy{
     0 0 2rem papayawhip,
     0 0 3rem gold,
     0 0 10rem orange;
+  }
+}
+
+@keyframes planet-rotate-right{
+  from{
+    rotate: -20deg;
+  }
+
+  to{
+    rotate: 0deg;
+  }
+}
+
+@keyframes planet-rotate-left{
+  from{
+    rotate: 20deg;
+  }
+
+  to{
+    rotate: 0deg;
   }
 }

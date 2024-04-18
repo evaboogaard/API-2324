@@ -1,0 +1,31 @@
+.cast-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+
+  h2{
+    text-transform: uppercase;
+    opacity: 0.5;
+    letter-spacing: .5rem;
+    font-size: 1.25rem;
+  }
+
+  ul{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  li{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    img{
+      border-radius: .25rem;
+      aspect-ratio: 1;
+      width: clamp(3rem, 5vw, 5rem);
+      object-fit: cover;
+    }
+  }
+}

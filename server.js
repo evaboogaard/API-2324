@@ -41,7 +41,7 @@ app.get('/', async (req, res) => {
     //   movies = await getMovies(modeUrls[selectedMode]);
     // } else {
       // Als de modus niet geldig is, haal films op met de standaard URL
-      movies = await getMovies(apiUrl);
+    movies = await getMovies(apiUrl);
     // }
 
     return res.send(
@@ -67,6 +67,7 @@ const getMovies = async (url) => {
     console.log(first10Movies.map(movie => movie.title));
 
     return first10Movies.map(movie => ({
+      id: movie.id,
       title: movie.title,
       overview: movie.overview,
       trailerLink: `https://www.youtube.com/results?search_query=${encodeURIComponent(movie.title)}+trailer`,
@@ -115,10 +116,55 @@ const mapGenres = (genreIds) => {
   }).join(', ');
 };
 
-app.get('/details', async (req, res) => {
-  return res.send(
-    renderTemplate('views/detail.liquid', { title: 'Another Title' }),
-  );
+// app.get('/details', async (req, res) => {
+//   return res.send(
+//     renderTemplate('views/detail.liquid', { title: 'Detail' }),
+//   );
+// });
+
+
+app.get('/:id', async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const movieId = req.params.id;
+
+    const movieResponse = await fetch(
+      `${baseUrl}/movie/${movieId}?language=en-US`,
+      options
+    );
+    const movieData = await movieResponse.json();
+
+    const imagesResponse = await fetch(
+      `${baseUrl}/movie/${movieId}/images`,
+      options
+    );
+    const imagesData = await imagesResponse.json();
+
+    const creditsResponse = await fetch(
+      `${baseUrl}/movie/${movieId}/credits`,
+      options
+    );
+    const creditsData = await creditsResponse.json();
+
+    const similarResponse = await fetch(
+      `${baseUrl}/movie/${movieId}/similar`,
+      options
+    );
+    const similarData = await similarResponse.json();
+
+    const movieWithImages = {
+      ...movieData,
+      images: imagesData.backdrops,
+      credits: creditsData,
+      similar: similarData
+    };
+
+    // console.log(movieWithImages);
+    res.send(renderTemplate('views/detail.liquid', { title: 'Movie Detail', movie: movieWithImages }));
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 const renderTemplate = (template, data) => {
