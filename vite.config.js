@@ -11,8 +11,8 @@ export default defineConfig({
     manifest: true,
     emptyOutDir: false,
     outDir: 'dist',
-    // rollupOptions: {
-    //   input: path.resolve(__dirname, 'main.js'),
-    // },
+    rollupOptions: {
+      input: path.resolve(__dirname, 'main.js'),
+    },
   },
 });
