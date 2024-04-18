@@ -48,11 +48,11 @@
 .back-btn{
   display: block;
   width: 3rem;
-  transform: translate(-1rem, -3rem);
+  transform: translate(4vw, -3rem);
   transition: var(--transition-base);
   opacity: 0.7;
 
   &:hover{
-    transform: translate(-2rem, -3rem);
+    transform: translate(3vw, -3rem);
   }
 }

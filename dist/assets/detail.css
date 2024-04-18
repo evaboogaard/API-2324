@@ -8,8 +8,8 @@
 
 .detail-container{
   background-color: rgba(255, 255, 255, 0.234);
-  width: 80%;
-  transform: translateX(10%);
+  /* width: 80%; */
+  /* transform: translateX(10%); */
 }
 
 .hero-img-container{
@@ -28,16 +28,6 @@
     position: absolute;
     width: 100%;
     object-fit: cover;
-  }
-}
-
-
-.images-container{
-  display: flex;
-  overflow-x: scroll;
-
-  .detail-img{
-    width: clamp(20rem, 100%, 40rem);
   }
 }
 
@@ -85,5 +75,20 @@
     background-color: var(--bg-half-transparent);
     padding: .5rem 1rem;
     border-radius: 2rem;
+  }
+}
+
+/* dank cyd <3 */
+.images-container {
+  --i: 0;
+  --img-width: 30rem;
+  display: flex;
+  transform: translateX(calc(-100% * var(--i)));
+  .detail-img{
+    display: block;
+    width: var(--img-width);
+  }
+  &:nth-child(even) {
+    transform: translateX(calc(-100% * (1 - var(--i))));
   }
 }

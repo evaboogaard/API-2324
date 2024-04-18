@@ -34,12 +34,12 @@
   box-shadow: 0 0 .5rem white;
 }
 
-
 ul.galaxy{
   display: flex;
   flex-direction: column;
   gap: 10rem;
   padding: 20vh 10vw;
+  padding-top: 10vh;
 
   li{
     position: relative;
@@ -74,6 +74,11 @@ ul.galaxy{
     perspective: 80rem;
     transform-origin: center;
     transition: var(--transition-base);
+    background-image:
+    linear-gradient(45deg, var(--clr-1) var(--p1), transparent var(--p2)),
+    linear-gradient(135deg, var(--clr-2) var(--a1), transparent var(--a2)),
+    linear-gradient(225deg, var(--clr-3) 10%, transparent 60%),
+    linear-gradient(315deg, var(--clr-4) 100%, transparent 70%);
 
     &:hover{
       outline: 2px solid color-mix(
@@ -137,12 +142,11 @@ ul.galaxy{
   }
 
   #sun{
+    --clr-1: orangered;
+    --clr-2: gold;
+    --clr-3: darkorange;
+    --clr-4: gold;
     width: var(--sun-width);
-    background-image:
-      linear-gradient(45deg, orangered var(--p1), transparent var(--p2)),
-      linear-gradient(135deg, gold var(--a1), transparent var(--a2)),
-      linear-gradient(225deg, darkorange 10%, transparent 60%),
-      linear-gradient(315deg, gold 100%, transparent 70%);
     animation-name: sun-var-ani, sun-boxshadow;
     animation-duration: 2s, 2s;
     animation-timing-function: ease-in-out, ease-in-out;
@@ -169,38 +173,39 @@ ul.galaxy{
   }
 
   #venus{
+    --clr-1: red;
+    --clr-2: #c60000;
+    --clr-3: darkorange;
+    --clr-4: #cc6d00;
     width: calc(var(--sun-width) * 0.7);
-    background-image:
-      linear-gradient(45deg, red var(--p1), transparent var(--p2)),
-      linear-gradient(135deg, #c60000 var(--a1), transparent var(--a2)),
-      linear-gradient(225deg, darkorange 10%, transparent 60%),
-      linear-gradient(315deg, #cc6d00 100%, transparent 70%);
     rotate: 5deg;
     animation: planet-rotate-left 2.5s infinite ease-in-out alternate;
   }
 
   #earth{
+    --clr-1: dodgerblue;
+    --clr-2: midnightblue;
+    --clr-3: seagreen;
+    --clr-4: green;
     width: calc(var(--sun-width) * 0.6);
-    background-image:
-      linear-gradient(45deg, dodgerblue var(--p1), transparent var(--p2)),
-      linear-gradient(135deg, midnightblue var(--a1), transparent var(--a2)),
-      linear-gradient(225deg, seagreen 10%, transparent 60%),
-      linear-gradient(315deg, green 100%, transparent 70%);
     rotate: -5deg;
     animation: planet-rotate-left 3s infinite ease-in-out alternate;
   }
 
   #mars{
+    --clr-1: maroon;
+    --clr-2: saddlebrown;
+    --clr-3: sandybrown;
     width: calc(var(--sun-width) * 0.5);
     background-image:
-    linear-gradient(
-      140deg in oklch,
-      maroon,
-      transparent 2%
-    ),
-    repeating-radial-gradient(
-    saddlebrown 0 1rem,
-    sandybrown 2rem 3rem
+      linear-gradient(
+        140deg in oklch,
+        var(--clr-1),
+        transparent 2%
+      ),
+      repeating-radial-gradient(
+        var(--clr-2) 0 1rem,
+        var(--clr-3) 2rem 3rem
     );
     background-size: 10000% 200%;
     background-position: top left;
@@ -209,36 +214,73 @@ ul.galaxy{
   }
 
   #jupiter{
+    --clr-1: darkorange;
+    --clr-2: blueviolet;
+    --clr-3: indigo;
+    --clr-4: ivory;
     width: calc(var(--sun-width) * 0.8);
-    background-color: blue;
     rotate: 10deg;
     animation: planet-rotate-left 3s infinite ease-in-out alternate;
   }
 
   #saturn{
+    --clr-1: lightsteelblue;
+    --clr-2: lightslategray;
+    --clr-3: mintcream;
+    background-image:
+      linear-gradient(
+        140deg in oklch,
+        var(--clr-1),
+        transparent 2%
+      ),
+      repeating-radial-gradient(
+        var(--clr-2) 0 1rem,
+        var(--clr-3) 2rem 3rem
+    );
+    background-size: 3000% 200%;
+    background-position: top left;
     width: calc(var(--sun-width) * 0.8);
-    background-color: rebeccapurple;
     rotate: -15deg;
     animation: planet-rotate-right 2.5s infinite ease-in-out alternate;
   }
 
   #uranus{
+    --clr-1: blue;
+    --clr-2: rebeccapurple;
+    --clr-3: mediumvioletred;
+    background-image:
+    linear-gradient(
+      140deg in oklch,
+      var(--clr-1),
+      transparent 2%
+    ),
+    repeating-radial-gradient(
+      var(--clr-2) 0 1rem,
+      var(--clr-3) 2rem 3rem
+  );
+  background-size: 500% 200%;
+  background-position: bottom right;
     width: calc(var(--sun-width) * 0.6);
-    background-color: darkcyan;
     rotate: 5deg;
     animation: planet-rotate-left 2s infinite ease-in-out alternate;
   }
 
   #neptune{
+    --clr-1: darkgreen;
+    --clr-2: darkkhaki;
+    --clr-3: rgb(3, 37, 3);
+    --clr-4: rgb(1, 63, 1);
     width: calc(var(--sun-width) * 0.6);
-    background-color: red;
     rotate: 10deg;
     animation: planet-rotate-right 3s infinite ease-in-out alternate;
   }
 
   #pluto{
+    --clr-1: darkred;
+    --clr-2: brown;
+    --clr-3: saddlebrown;
+    --clr-4: darkblue;
     width: calc(var(--sun-width) * 0.2);
-    background-color: saddlebrown;
     rotate: -10deg;
     animation: planet-rotate-left 2.5s infinite ease-in-out alternate;
     scale: 1.1;
