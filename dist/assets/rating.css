@@ -1,11 +1,22 @@
 fieldset {
 	display:flex;
 	font-size:2em;
-	border-radius:.5em;
+	border-radius:.25em;
+  background-color: var(--bg-half-transparent);
+  padding: 1rem;
+  padding-right: 3rem;
+  width: fit-content;
 }
 
 legend{
   font-size: 1rem;
+  background-color: color-mix(
+    in oklch,
+    var(--border-color),
+    transparent 40%
+  );  border-radius: .25rem;
+  padding: .5rem .5rem;
+  color: var(--background-color);
 }
 
 input {

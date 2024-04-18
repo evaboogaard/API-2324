@@ -31,13 +31,15 @@
     <div class="flex-row">
       <div class="movie-details">
         <h1>{{ movie.title }}</h1>
-        <p>{{ movie.release_date }}</p>
-        {% comment %} chatgpt ftw {% endcomment %}
-        {% assign total_minutes = movie.runtime %}
-        {% assign hours = total_minutes | divided_by: 60 | floor %}
-        {% assign minutes = total_minutes | modulo: 60 %}
+        <div class="metadata-row">
+          <p>{{ movie.release_date }}</p>
+          {% comment %} chatgpt ftw {% endcomment %}
+          {% assign total_minutes = movie.runtime %}
+          {% assign hours = total_minutes | divided_by: 60 | floor %}
+          {% assign minutes = total_minutes | modulo: 60 %}
 
-        <p>{{ hours }} hours and {{ minutes }} minutes</p>
+          <p>{{ hours }} hours and {{ minutes }} minutes</p>
+        </div>
         <p>{{ movie.overview }}</p>
 
         {% comment %} https://codepen.io/shooft/pen/jORYwqV?editors=1000 {% endcomment %}

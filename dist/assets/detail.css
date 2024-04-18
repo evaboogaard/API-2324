@@ -60,8 +60,8 @@
     letter-spacing: .5rem;
     mask-image: linear-gradient(
       to top,
-      transparent 0 10%,
-      red 50%
+      transparent 0 2%,
+      red 20%
     );
   }
 }
@@ -74,5 +74,16 @@
 
   @media (min-width: 800px){
     flex-direction: row;
+  }
+}
+
+.metadata-row{
+  display: flex;
+  gap: 1rem;
+
+  p{
+    background-color: var(--bg-half-transparent);
+    padding: .5rem 1rem;
+    border-radius: 2rem;
   }
 }

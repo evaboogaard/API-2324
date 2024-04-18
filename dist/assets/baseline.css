@@ -58,6 +58,11 @@ button{
 
 :root{
   --background-color: #20184a;
+  --bg-half-transparent: color-mix(
+    in oklch,
+    var(--background-color),
+    transparent 50%
+  );
   --text-color: papayawhip;
 
   --border-color: #a8d4ff;
