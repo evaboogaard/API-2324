@@ -1,11 +1,6 @@
-.flex-column{
-  display: flex;
-  flex-direction: column;
-  gap: 20rem;
-}
-
 .similar-container{
   position: relative;
+  margin-top: 25vh;
 }
 
 .similar-container h2{
