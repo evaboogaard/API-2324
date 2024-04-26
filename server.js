@@ -98,32 +98,31 @@ const mapGenres = (genreIds) => {
 
 app.get('/:id', async (req, res) => {
   try {
-    console.log(req.params.id);
     const movieId = req.params.id;
 
-    const movieResponse = await fetch(
-      `${baseUrl}/movie/${movieId}?language=en-US`,
-      options
-    );
-    const movieData = await movieResponse.json();
+    const [
+      movieResponse,
+      imagesResponse,
+      creditsResponse,
+      similarResponse
+    ] = await Promise.all([
+      fetch(`${baseUrl}/movie/${movieId}?language=en-US`, options),
+      fetch(`${baseUrl}/movie/${movieId}/images`, options),
+      fetch(`${baseUrl}/movie/${movieId}/credits`, options),
+      fetch(`${baseUrl}/movie/${movieId}/similar`, options)
+    ]);
 
-    const imagesResponse = await fetch(
-      `${baseUrl}/movie/${movieId}/images`,
-      options
-    );
-    const imagesData = await imagesResponse.json();
-
-    const creditsResponse = await fetch(
-      `${baseUrl}/movie/${movieId}/credits`,
-      options
-    );
-    const creditsData = await creditsResponse.json();
-
-    const similarResponse = await fetch(
-      `${baseUrl}/movie/${movieId}/similar`,
-      options
-    );
-    const similarData = await similarResponse.json();
+    const [
+      movieData,
+      imagesData,
+      creditsData,
+      similarData
+    ] = await Promise.all([
+      movieResponse.json(),
+      imagesResponse.json(),
+      creditsResponse.json(),
+      similarResponse.json()
+    ]);
 
     const movieWithImages = {
       ...movieData,
@@ -132,10 +131,16 @@ app.get('/:id', async (req, res) => {
       similar: similarData
     };
 
-    res.send(renderTemplate('views/detail.liquid', { title: 'Movie Detail', movie: movieWithImages }));
+    res.send(
+      renderTemplate('views/detail.liquid', {
+        title: 'Movie Detail',
+        movie: movieWithImages
+      })
+    );
   } catch (error) {
     console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.statusCode = 500;
+    res.end('Internal Server Error');
   }
 });
 
