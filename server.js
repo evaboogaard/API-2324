@@ -4,7 +4,6 @@ import { logger } from '@tinyhttp/logger';
 import { Liquid } from 'liquidjs';
 import sirv from 'sirv';
 import fetch from 'node-fetch';
-import fs from 'node:fs';
 
 const engine = new Liquid({
   extname: '.liquid',
@@ -18,31 +17,16 @@ const options = {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlMmMwMTUyM2MwZDI4MDkwM2YxNWVjOWJiN2EyYTA2MyIsInN1YiI6IjY2MGJkYWQ1MTQ5NTY1MDE3ZGJiMTYzYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3ODaT0udaIUcj9ClqusoZI7pHxRJmxprbC_GI4fzON4'
   }
 };
-const apiKey = process.env.MOVIEDB_TOKEN; // API-sleutel uit .env-bestand
+const apiKey = process.env.MOVIEDB_TOKEN;
 const apiUrl = `${baseUrl}/discover/movie?api_key=${apiKey}&include_adult=false&include_video=false&language=en-US&sort_by=vote_count.desc&with_genres=878&without_companies=420`;
 const app = new App();
 
 app.use(logger()).use('/', sirv('dist/assets')).listen(3000);
 
-// const modeUrls = {
-//   'trending': `${baseUrl}/discover/movie?api_key=${apiKey}&include_adult=false&include_video=false&language=en-US&sort_by=popularity.desc&with_genres=878`,
-//   'classic': `${baseUrl}/discover/movie?api_key=${apiKey}&include_adult=false&include_video=false&language=en-US&sort_by=vote_count.desc&with_genres=878`,
-//   'obscure': `${baseUrl}/discover/movie?api_key=${apiKey}&include_adult=false&include_video=false&language=en-US&page=100&sort_by=vote_count.desc&with_genres=878`
-// };
-
-
 app.get('/', async (req, res) => {
   try {
     let movies;
-    // const selectedMode = req.query.mode || 'trending'; // standaard modus
-
-    // Als de geselecteerde modus overeenkomt met een geldige URL, haal dan films op met die URL
-    // if (modeUrls[selectedMode]) {
-    //   movies = await getMovies(modeUrls[selectedMode]);
-    // } else {
-      // Als de modus niet geldig is, haal films op met de standaard URL
     movies = await getMovies(apiUrl);
-    // }
 
     return res.send(
       renderTemplate('views/index.liquid', { title: 'Galaxy Gaze', movies }),
@@ -58,10 +42,7 @@ const getMovies = async (url) => {
     const response = await fetch(url, options);
     const data = await response.json();
 
-    // Hier kun je de gewenste bewerkingen uitvoeren op de verkregen filmgegevens
     const sciFiMovies = data.results.filter(movie => movie.genre_ids.includes(878));
-
-    // Alleen de eerste 10 films behouden
     const first10Movies = sciFiMovies.slice(0, 10);
 
     console.log(first10Movies.map(movie => movie.title));
@@ -70,9 +51,7 @@ const getMovies = async (url) => {
       id: movie.id,
       title: movie.title,
       overview: movie.overview,
-      trailerLink: `https://www.youtube.com/results?search_query=${encodeURIComponent(movie.title)}+trailer`,
       posterImg: movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : null,
-      duration: movie.runtime || 0,
       language: movie.original_language,
       genres: mapGenres(movie.genre_ids),
       releaseYear: movie.release_date ? new Date(movie.release_date).getFullYear() : null
@@ -116,12 +95,6 @@ const mapGenres = (genreIds) => {
   }).join(', ');
 };
 
-// app.get('/details', async (req, res) => {
-//   return res.send(
-//     renderTemplate('views/detail.liquid', { title: 'Detail' }),
-//   );
-// });
-
 
 app.get('/:id', async (req, res) => {
   try {
@@ -159,7 +132,6 @@ app.get('/:id', async (req, res) => {
       similar: similarData
     };
 
-    // console.log(movieWithImages);
     res.send(renderTemplate('views/detail.liquid', { title: 'Movie Detail', movie: movieWithImages }));
   } catch (error) {
     console.error(error);

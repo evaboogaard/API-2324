@@ -127,10 +127,10 @@ gsap.from(sun, {
   ease: 'power4.out',
   duration: 2,
   delay: 12,
-  onComplete: startOtherAnimations // De haakjes zijn verwijderd om de functie niet meteen uit te voeren
+  onComplete: startOtherAnimations
 });
 
-function startOtherAnimations () { // De haakjes zijn verwijderd van de functiedeclaratie
+function startOtherAnimations () {
   const planetsOdd = document.querySelectorAll('.galaxy li:nth-of-type(odd) .planet:not(#sun)');
   const planetTlOne = gsap.timeline();
   planetsOdd.forEach(planet => {
@@ -192,11 +192,11 @@ if (stars) {
   updateStars();
   stars.addEventListener('click', updateStars);
 }
-  // Functie om de loader aan te sturen
+
 function runLoader () {
   const loaderElement = document.getElementById('percentage');
-  const totalTime = 10000; // Totaal aantal milliseconden
-  const updateInterval = 100; // Interval om het percentage bij te werken
+  const totalTime = 10000;
+  const updateInterval = 100;
 
   let currentTime = 0;
 
@@ -216,25 +216,19 @@ function runLoader () {
   }, updateInterval);
 }
 
-// Start de loader wanneer het document is geladen
 document.addEventListener('DOMContentLoaded', () => {
   runLoader();
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Wait for the document to be fully loaded
   setTimeout(function () {
-      // Get the loader element
-      var loader = document.querySelector('.loader');
-
-      // Add a class to hide the loader
+      const loader = document.querySelector('.loader');
       loader.classList.add('hidden');
 
-      // Add another timeout to add 'none' class after 1 second (1000 milliseconds)
       setTimeout(function () {
           loader.classList.add('none');
       }, 1000);
-  }, 12000); // 12 seconds in milliseconds
+  }, 12000);
 });
 
 
