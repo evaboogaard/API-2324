@@ -10,6 +10,9 @@ dit was mijn proces
 ![](process/sketch_4.jpg)
 
 ## week 2 & 3
+dit is mijn final sketch voor het project, ik wil planeetjes maken met de top 10 scifi films eraan gekoppeld.
+![](process/sketch_final.jpg)
+
 ik ben begonnen met het lezen van de documentatie van liquid. ik had al eerder met handlebars en laravel blade gewerkt als templating engines, dus ik wist wel een beetje wat je ermee zou kunnen.
 
 maar ik ben technisch niet echt een held dus ik heb me gewoon gehouden aan het template dingetje van de api repo.
@@ -28,6 +31,8 @@ for some reason kreeg ik t niet voor elkaar om de genre namen te fetchen dus k h
 voor de detailpagina heb ik het id van de film in de url gezet en gebaseerd hierop nieuwe informatie gefetcht door het unieke id in de baseUrl te injecteren. dat is volgens mij niet helemaal hoe het hoort maar dat is wel hoe het werkt.
 ![](process/code_4.png)
 
+dit is mn final homepage geworden 
+![](process/project_final.png)
 
 
 
